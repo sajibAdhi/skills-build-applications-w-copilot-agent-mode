@@ -46,4 +46,4 @@ class Command(BaseCommand):
         ]
         Workout.objects.bulk_create(workouts)
 
-        self.stdout.write(self.style.SUCCESS('Database populated with test data.'))
+        self.stdout.write(self.style.SUCCESS('Database populated with test data for octofit-tracker.'))
