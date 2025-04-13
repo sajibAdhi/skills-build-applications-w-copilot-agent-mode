@@ -21,13 +21,9 @@ class Command(BaseCommand):
 
         # Add test teams
         teams = [
-            Team(name="Team Alpha"),
+            Team(name="Team Alpha", members=["john.doe@example.com", "jane.smith@example.com"]),
         ]
         Team.objects.bulk_create(teams)
-
-        # Add users to teams (ensuring relationships are properly handled)
-        team_alpha = Team.objects.get(name="Team Alpha")
-        team_alpha.members.add(*User.objects.all())
 
         # Add test activities
         activities = [
