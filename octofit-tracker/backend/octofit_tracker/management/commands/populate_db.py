@@ -21,21 +21,25 @@ class Command(BaseCommand):
 
         # Add test teams
         teams = [
-            Team(name="Team Alpha", members=["john.doe@example.com", "jane.smith@example.com"]),
+            Team(name="Team Alpha"),
         ]
         Team.objects.bulk_create(teams)
 
+        # Add users to teams (ensuring relationships are properly handled)
+        team_alpha = Team.objects.get(name="Team Alpha")
+        team_alpha.members.add(*User.objects.all())
+
         # Add test activities
         activities = [
-            Activity(user="john.doe@example.com", activity_type="running", duration=30),
-            Activity(user="jane.smith@example.com", activity_type="cycling", duration=45),
+            Activity(user=User.objects.get(email="john.doe@example.com"), activity_type="running", duration=30),
+            Activity(user=User.objects.get(email="jane.smith@example.com"), activity_type="cycling", duration=45),
         ]
         Activity.objects.bulk_create(activities)
 
         # Add test leaderboard entries
         leaderboard = [
-            Leaderboard(user="john.doe@example.com", score=100),
-            Leaderboard(user="jane.smith@example.com", score=150),
+            Leaderboard(user=User.objects.get(email="john.doe@example.com"), score=100),
+            Leaderboard(user=User.objects.get(email="jane.smith@example.com"), score=150),
         ]
         Leaderboard.objects.bulk_create(leaderboard)
 
